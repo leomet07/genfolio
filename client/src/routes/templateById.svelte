@@ -206,11 +206,20 @@
 		left: 25%;
 		transform: translateX(-50%);
 		width: 12rem;
+		height: 2.5rem;
 		background-color: #212327;
 		border: none;
+		color: white;
+		font-family: "IBM Plex Mono", sans-serif;
+		font-weight: 400;
+		border-radius: 1rem;
 	}
 	.next-button:hover {
 		background-color: #c25eff;
 		cursor: pointer;
+	}
+
+	textarea {
+		resize:none;
 	}
 </style>

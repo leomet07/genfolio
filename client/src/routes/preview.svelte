@@ -20,7 +20,7 @@
 
 <div class="App">
 	<a href="">
-		<img alt="github" src="/github.png" class="github" />
+		<img alt="github" src="/img/github.png" class="github" />
 	</a>
 
 	<div class="main-content">
