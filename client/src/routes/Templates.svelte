@@ -1,11 +1,10 @@
-<script>
-</script>
+
 
 <div class="root">
 	<div class="item1">Choose a Template</div>
 	<div class="grid-container">
 		<div class="grid-item">
-			<p class="ttext">Template 1 Name</p>
+			<p class="ttext">Purple Dark</p>
 			<button
 				class="templatebutton"
 				onclick="
@@ -50,7 +49,19 @@
 		margin: 0;
 		padding: 0;
 	}
-
+	button:hover {
+		cursor: pointer;
+	}
+	.item1 {
+		color: white;
+		font-size: 2em;
+		font-weight: bold;
+		text-align: center;
+		font-family: "Inter", sans-serif;
+		font-weight: 800;
+		font-size: 4rem;
+		padding: 5%;
+	}
 	.grid-container {
 		display: grid;
 		width: 70%;
@@ -72,7 +83,7 @@
 		border-radius: 7px;
 		font-family: "Inter";
 		font-weight: 500;
-		opacity:0;
+		opacity:0.5;
 		transition: opacity 0.5s;
 	}
 	.grid-item:hover .ttext {
@@ -82,8 +93,9 @@
 		opacity: 1;
 	}
 	.ttext {
-		opacity: 0;
+		opacity: 0.5;
 		transition: opacity 0.5s;
+		color : white;
 	}
 
 	.grid-item {
