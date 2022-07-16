@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const app = express();
 
+const get_running_server_info = require("./utils/get_running_server_info")
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -68,7 +69,7 @@ app.get(["/", "/*"], function (req, res, next) {
 	res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-const port = process.env.PORT || 5678;
+const port = get_running_server_info.get_server_running_port();
 app.listen(port, () => {
-	console.log("Sever is up and running at http://127.0.0.1:" + port);
+	console.log("Sever is up and running at " + get_running_server_info.get_server_running_url());
 });

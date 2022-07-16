@@ -6,11 +6,11 @@ async function copy_template(template, new_name) {
 	const start = path.join("templates", template); // must be run from root of server folder
 	const end = path.join("sites", new_name);
 
-	if (process.env.DEV != "true") {
-		if (fs.existsSync(end)) {
-			throw new Error(`Site at ${end} already exists!`);
-		}
-	}
+	// if (process.env.DEV != "true") {
+	// 	if (fs.existsSync(end)) {
+	// 		throw new Error(`Site at ${end} already exists!`);
+	// 	}
+	// }
 
 	await fs.copy(start, end);
 
