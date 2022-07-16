@@ -11,14 +11,11 @@ window.onload = async function () {
 		spans.push(span.innerHTML);
 	}
 
-	typewriter
-		.typeString(spans[0])
-		.pauseFor(2500)
-		.deleteAll()
-		.typeString(spans[1])
-		.pauseFor(2500)
-		.deleteAll()
-		.typeString(spans[2])
-		.pauseFor(2500)
-		.start();
+	for(let i = 0; i < spans.length; i++) {
+		typewriter.typeString(spans[i]);
+		typewriter.pauseFor(1500);
+		typewriter.deleteAll();
+	}
+	typewriter.start();
+	
 };

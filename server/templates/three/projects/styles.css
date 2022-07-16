@@ -38,10 +38,6 @@ h1 {
 	z-index: 1;
 }
 
-canvas {
-	position: absolute;
-}
-
 h3 {
 	font-size: 2rem;
 	padding: 0;
@@ -65,7 +61,7 @@ h4 {
 	font-family: "IBM Plex Sans", sans-serif;
 }
 
-.projects-button {
+.home-button {
 	width: 14rem;
 	margin-top: 1rem;
 	border: none;
@@ -82,7 +78,7 @@ h4 {
 	align-items: center;
 	padding: 10px;
 }
-.projects-button:hover {
+.home-button:hover {
 	background-color: #e879e9;
 	color: white;
 	cursor: pointer;
@@ -99,8 +95,4 @@ h4 {
 }
 .github:hover {
 	cursor: pointer;
-}
-
-#description_tags {
-	display: none;
 }
