@@ -7,8 +7,15 @@
 	import { github_username } from "../store";
 	import About from "./About.svelte";
 	// import A1 from "./templates/1.svelte";
-
+	import fetch_user_data from "../helpers/fetch_user_data";
+	import { onMount } from "svelte";
 	$github_username = "Test";
+
+	onMount(async () => {
+		const user_data = await fetch_user_data("leomet07");
+
+		console.log(user_data);
+	});
 </script>
 
 <svelte:head>
@@ -23,11 +30,6 @@
 <div class="root">
 	<div class="editor">
 		<h1 class="header">Editor</h1>
-
-		<div class="page-select">
-
-		</div>
-
 
 		<div class="divider" />
 		<div class="info">
@@ -87,6 +89,7 @@
 					</div>
 				{/each}
 			</div>
+			<button class="next-button">Next</button>
 		</div>
 	</div>
 	<div class="preview">
@@ -194,6 +197,19 @@
 		font-family: "IBM Plex Mono", sans-serif;
 	}
 	.remove:hover {
+		background-color: #c25eff;
+		cursor: pointer;
+	}
+	.next-button {
+		position: absolute;
+		bottom: 1rem;
+		left: 25%;
+		transform: translateX(-50%);
+		width: 12rem;
+		background-color: #212327;
+		border: none;
+	}
+	.next-button:hover {
 		background-color: #c25eff;
 		cursor: pointer;
 	}

@@ -5,7 +5,6 @@
 	import About from "./routes/About.svelte";
 	import Templates from "./routes/Templates.svelte";
 	import templateById from "./routes/templateById.svelte";
-	import q1 from "./routes/q1.svelte";
 	import preview from './routes/preview.svelte';
 	export let url = "";
 </script>
@@ -16,7 +15,6 @@
 		<Route path="/"><Home /></Route>
 		<Route path="templates" component={Templates} />
 		<Route path="templates/:id" component={templateById} />
-		<Route path="q1" component={q1} />
 		<Route path="preview/:id" component={preview} />
 	</div>
 </Router>
