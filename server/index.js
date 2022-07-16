@@ -49,7 +49,7 @@ app.use(
 );
 
 app.get(["/", "/*"], function (req, res, next) {
-	// res.set("Content-Security-Policy", "connect-src https://*.mydomain.com");
+	res.set("Content-Security-Policy", "connect-src https://*.mydomain.com");
 	res.set("X-Frame-Options", "SAMEORIGIN");
 	res.set("X-XSS-Protection", "1; mode=block");
 	res.set("X-Content-Type-Options", "nosniff");
