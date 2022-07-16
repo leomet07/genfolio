@@ -1,0 +1,101 @@
+* {
+	font-family: sans-serif;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+main {
+	background-color: black;
+	width: 100vw;
+	height: 100vh;
+	font-family: Inter;
+	overflow-x: hidden;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.main-content {
+	display: flex;
+	width: 100vw;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+h1 {
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	font-size: 4rem;
+	color: #eee;
+
+	z-index: 1;
+}
+
+canvas {
+	position: absolute;
+}
+
+h3 {
+	font-size: 2rem;
+	padding: 0;
+	margin: 0 0 1rem;
+	color: #e879e9;
+	font-family: "IBM Plex Mono", monospace;
+	font-weight: 200;
+}
+
+h4 {
+	color: #8892b0;
+	font-size: 1.3rem;
+	max-width: 80%;
+	padding: 0;
+	margin: 0;
+	font-family: "IBM Plex Sans", sans-serif;
+}
+
+.projects-button {
+	width: 25%;
+	margin-top: 1rem;
+	border: none;
+	height: 2.5rem;
+	background-color: white;
+	color: black;
+	font-family: "Inter";
+	border-radius: 5px;
+	font-weight: 700;
+	transition: 0.5s;
+	font-size: 1rem;
+}
+.projects-button:hover {
+	background-color: #e879e9;
+	color: white;
+	cursor: pointer;
+}
+
+.projects-title {
+	margin-bottom: 0;
+}
+
+.github {
+	position: absolute;
+	bottom: 1rem;
+	height: 30px;
+	width: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 999;
+}
+.github:hover {
+	cursor: pointer;
+}
+
+#description_tags {
+	display: none;
+}
