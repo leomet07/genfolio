@@ -3,18 +3,17 @@
 	import { Router, Link, Route } from "svelte-routing";
 	import Home from "./routes/Home.svelte";
 	import About from "./routes/About.svelte";
-
+	import Templates from "./routes/Templates.svelte";
+	import templateById from "./routes/templateById.svelte";
 	export let url = "";
 </script>
 
 <Router {url}>
-	<nav id="navbar">
-		<Link to="/">Home</Link>
-		<Link to="about">About</Link>
-	</nav>
 	<div id="render">
 		<Route path="about" component={About} />
 		<Route path="/"><Home /></Route>
+		<Route path="templates" component={Templates} />
+		<Route path="templates/:id" component={templateById} />
 	</div>
 </Router>
 
@@ -28,4 +27,5 @@
 		margin: 0px;
 		padding: 0px;
 	}
+
 </style>
