@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const copy_template = require("../utils/copy_template");
+const { copy_template, edit_files } = require("../utils/file_system");
+const { get_user_data } = require("../utils/github_api");
 
 router.get("/", (req, res) => {
 	res.json({ message: "Hello world from /api." });
@@ -13,14 +14,18 @@ router.post("/generate_site", async (req, res, next) => {
 			throw new Error("No github username specified. ");
 		}
 
-		const success = await copy_template("one", github_username);
+		const user_data = await get_user_data(github_username);
 
-		if (!success) {
+		const template_success = await copy_template("one", github_username);
+
+		if (!template_success) {
 			throw new Error("Something went wrong!");
 		}
 
-		res.json({
-			success: success,
+		const edit_success = await edit_files(github_username, user_data);
+		return res.json({
+			success: true,
+			user_data: user_data,
 			site: "/site/" + github_username,
 		});
 	} catch (error) {
