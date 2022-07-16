@@ -3,6 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 // const mongoose = require("mongoose");
 const morgan = require("morgan");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -32,10 +33,27 @@ app.use("/site", express.static("sites"));
 //Routes Middleware
 app.use("/api/", apiRouter);
 
-app.use("/", express.static("public"));
+app.use(
+	express.static(__dirname + "/public", {
+		setHeaders: function (res, path, stat) {
+			res.set("Access-Control-Allow-Origin", "*");
+			res.set(
+				"Content-Security-Policy",
+				"connect-src https://*.mydomain.com"
+			);
+			res.set("X-Frame-Options", "SAMEORIGIN");
+			res.set("X-XSS-Protection", "1; mode=block");
+			res.set("X-Content-Type-Options", "nosniff");
+		},
+	})
+);
 
-app.get("*", (req, res) => {
-	res.redirect("/");
+app.get(["/", "/*"], function (req, res, next) {
+	res.set("Content-Security-Policy", "connect-src https://*.mydomain.com");
+	res.set("X-Frame-Options", "SAMEORIGIN");
+	res.set("X-XSS-Protection", "1; mode=block");
+	res.set("X-Content-Type-Options", "nosniff");
+	res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const port = process.env.PORT || 5678;
