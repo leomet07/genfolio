@@ -2,7 +2,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 const octokit = require("octokit");
 
-const session = new octokit.Octokit({ auth: process.env.GH_TOKEN });
+const session = new octokit.Octokit(
+	process.env.GH_TOKEN ? { auth: process.env.GH_TOKEN } : {}
+);
+
 // https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting
 // greatly increased rate-limits if authentication is included
 
