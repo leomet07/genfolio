@@ -1,9 +1,21 @@
 <div class="root">
 	<div class="grid-container">
-		<div class="item1">Header</div>
-		<div class="item2">Template 1</div>
-		<div class="item3">Template 2</div>
-		<div class="item4">Template 3</div>
+		<div class="item1">
+			Choose a Template
+
+		</div>
+		<div class="item2">
+			Template 1
+			<a href="" id="templatebutton">Use</a>
+		</div>
+		<div class="item3">
+			Template 2
+			<a href="" id="templatebutton">Use</a>
+		</div>
+		<div class="item4">
+			Template 3
+			<a href="" id="templatebutton">Use</a>
+		</div>
 	</div>
 </div>
 
@@ -24,12 +36,15 @@
 	}
 	.item2 {
 		grid-area: t1;
+		position: relative;
 	}
 	.item3 {
 		grid-area: t2;
+		position: relative;
 	}
 	.item4 {
 		grid-area: t3;
+		position: relative;
 	}
 
 	.grid-container {
@@ -42,7 +57,6 @@
 			"t1 t1 t2 t2 t3 t3"
 			"t1 t1 t2 t2 t3 t3";
 		gap: 10px;
-		background-color: #2196f3;
 	}
 
 	.grid-container > div {
@@ -62,6 +76,9 @@
 		font-size: 16px;
 		margin: 30px;
 		border-radius: 7px;
+		position: absolute;
+		right: 0;
+		bottom: 0;
 	}
 	.description {
 		width: 50%;

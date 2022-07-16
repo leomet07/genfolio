@@ -1,21 +1,30 @@
 <svelte:head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap"
+		rel="stylesheet"
+	/>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap"
+		rel="stylesheet"
+	/>
 </svelte:head>
 
 <!-- The styling here is rough, but it doesn't matter right now (clean later)-->
 
 <div class="root">
 	<div class="title-container">
-		<h1 class="title gradient">create portfolio sites with ease</h1>
-		<h3 class="description">
+		<h1 class="title gradient" >
+			create portfolio sites with ease
+		</h1>
+		<h3 class="description" >
 			Don't waste your time creating a portfolio site. Use one of our
 			templates and get your dream job.
 		</h3>
-		<a href="/templates" id="templatebutton">Templates</a>
+		<a href="/templates" id="templatebutton" 
+			>Templates</a
+		>
 	</div>
 </div>
 
@@ -43,8 +52,8 @@
 		font-size: 16px;
 		margin: 30px;
 		border-radius: 7px;
-        font-family: "Inter";
-        font-weight: 500;
+		font-family: "Inter";
+		font-weight: 500;
 	}
 	.description {
 		width: 70%;
