@@ -29,7 +29,19 @@ if (process.env.SSL == "true") {
 // import Routes
 const apiRouter = require("./routes/api").router;
 
-app.use("/site", express.static("sites"));
+app.use("/site", express.static(__dirname + "/sites", {
+	setHeaders: function (res, path, stat) {
+		res.set("Access-Control-Allow-Origin", "*");
+		res.set(
+			"Content-Security-Policy",
+			"connect-src https://*.mydomain.com"
+		);
+		res.set("X-Frame-Options", "SAMEORIGIN");
+		res.set("X-XSS-Protection", "1; mode=block");
+		res.set("X-Content-Type-Options", "nosniff");
+	},
+}));
+
 //Routes Middleware
 app.use("/api/", apiRouter);
 
