@@ -4,6 +4,8 @@
 	let githubLink = "";
 	let currentString = "";
 	let strings = [];
+	let page = "page1";
+	let repos = [];
 	import { github_username } from "../store";
 	import About from "./About.svelte";
 	// import A1 from "./templates/1.svelte";
@@ -13,8 +15,7 @@
 
 	onMount(async () => {
 		const user_data = await fetch_user_data("leomet07");
-
-		console.log(user_data);
+		repos = user_data.repos;
 	});
 </script>
 
@@ -29,68 +30,86 @@
 
 <div class="root">
 	<div class="editor">
-		<h1 class="header">Editor</h1>
+		{#if page === "page1"}
+			<button class="next-button" on:click={() => {page = "page2"}}>Next</button>
 
-		<div class="divider" />
-		<div class="info">
-			<label class="label">First Name</label>
-			<input
-				bind:value={name}
-				class="input"
-				type="text"
-				placeholder="First Name"
-			/>
-			<label class="label">Bio</label>
-			<textarea
-				bind:value={bio}
-				class="input"
-				placeholder="ex. I'm a student as x and I am currently building y"
-			/>
-			<label class="label">Github Link</label>
-			<input
-				bind:value={githubLink}
-				class="input"
-				type="text"
-				placeholder="ex. https://github.com/jmurphy5613"
-			/>
+			<h1 class="header">Editor</h1>
 
-			<label class="label">Animated Strings Input</label>
-			<div class="strings-input">
+			<div class="divider" />
+			<div class="info">
+				<label class="label">First Name</label>
 				<input
-					bind:value={currentString}
+					bind:value={name}
 					class="input"
 					type="text"
-					placeholder="software engineer"
+					placeholder="First Name"
 				/>
-				<button
-					class="add"
-					on:click={() => {
-						if (currentString.length > 0) {
-							// strings.push(currentString);
-							strings = [...strings, currentString];
-							currentString = "";
-							console.log(strings);
-						}
-					}}>+</button
-				>
-			</div>
-			<div class="strings">
-				{#each strings as string, index}
-					<div style="display: flex; align-items: center">
-						<span class="string-text">{string}</span>
-						<button
-							class="remove"
-							on:click={() => {
-								strings.pop(index);
+				<label class="label">Bio</label>
+				<textarea
+					bind:value={bio}
+					class="input"
+					placeholder="ex. I'm a student as x and I am currently building y"
+				/>
+				<label class="label">Github Link</label>
+				<input
+					bind:value={githubLink}
+					class="input"
+					type="text"
+					placeholder="ex. https://github.com/jmurphy5613"
+				/>
+
+				<label class="label">Animated Strings Input</label>
+				<div class="strings-input">
+					<input
+						bind:value={currentString}
+						class="input"
+						type="text"
+						placeholder="software engineer"
+					/>
+					<button
+						class="add"
+						on:click={() => {
+							if (currentString.length > 0) {
+								// strings.push(currentString);
+								strings = [...strings, currentString];
+								currentString = "";
 								console.log(strings);
-								strings = strings;
-							}}>-</button
-						>
-					</div>
-				{/each}
+							}
+						}}>+</button
+					>
+				</div>
+				<div class="strings">
+					{#each strings as string, index}
+						<div style="display: flex; align-items: center">
+							<span class="string-text">{string}</span>
+							<button
+								class="remove"
+								on:click={() => {
+									strings.pop(index);
+									console.log(strings);
+									strings = strings;
+								}}>-</button
+							>
+						</div>
+					{/each}
+				</div>
 			</div>
-			<button class="next-button">Next</button>
-		</div>
+		{/if}
+		{#if page === "page2"}
+			<h1 class="header">Select Projects</h1>
+			<div class="divider" />
+			<div class="info">
+				<div class="repo-grid">
+					{#each repos as repo}
+						<div class="grid-item">
+
+						</div>
+					{/each}
+				</div>
+			</div>
+		{/if}
+
+
 	</div>
 	<div class="preview">
 		<!-- <h1 class="header">Preview</h1> -->
@@ -218,7 +237,16 @@
 		background-color: #c25eff;
 		cursor: pointer;
 	}
-
+	.repo-grid {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
+	}
+	.grid-item {
+		height: 10vh;
+		background-color: grey;
+	}
 	textarea {
 		resize:none;
 	}
