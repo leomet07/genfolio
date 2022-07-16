@@ -1,0 +1,24 @@
+{
+	"name": "express_template",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"serve": "nodemon index.js",
+		"start": "node index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^9.0.2",
+		"express": "^4.17.1",
+		"helmet": "^4.6.0",
+		"morgan": "^1.10.0",
+		"node-fetch": "^2.6.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.19"
+	}
+}
