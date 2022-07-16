@@ -4,7 +4,7 @@ const helmet = require("helmet");
 // const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
-const middlewares = require("./middlewares");
+
 const app = express();
 
 // Middleware
@@ -32,13 +32,11 @@ app.use("/site", express.static("sites"));
 //Routes Middleware
 app.use("/api/", apiRouter);
 
-app.get("/", function (req, res) {
-	res.json({ message: "Hello World to the project" });
-});
+app.use("/", express.static("public"));
 
-// Configure a middleware for 404s and the error handler
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.get("*", (req, res) => {
+	res.redirect("/");
+});
 
 const port = process.env.PORT || 5678;
 app.listen(port, () => {
