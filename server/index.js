@@ -3,8 +3,9 @@ const cors = require("cors");
 const helmet = require("helmet");
 // const mongoose = require("mongoose");
 const morgan = require("morgan");
+const path = require("path");
 require("dotenv").config();
-const middlewares = require("./middlewares");
+
 const app = express();
 
 // Middleware
@@ -28,17 +29,44 @@ if (process.env.SSL == "true") {
 // import Routes
 const apiRouter = require("./routes/api").router;
 
-app.use("/site", express.static("sites"));
+app.use("/site", express.static(__dirname + "/sites", {
+	setHeaders: function (res, path, stat) {
+		res.set("Access-Control-Allow-Origin", "*");
+		res.set(
+			"Content-Security-Policy",
+			"connect-src https://*.mydomain.com"
+		);
+		res.set("X-Frame-Options", "SAMEORIGIN");
+		res.set("X-XSS-Protection", "1; mode=block");
+		res.set("X-Content-Type-Options", "nosniff");
+	},
+}));
+
 //Routes Middleware
 app.use("/api/", apiRouter);
 
-app.get("/", function (req, res) {
-	res.json({ message: "Hello World to the project" });
-});
+app.use(
+	express.static(__dirname + "/public", {
+		setHeaders: function (res, path, stat) {
+			res.set("Access-Control-Allow-Origin", "*");
+			res.set(
+				"Content-Security-Policy",
+				"connect-src https://*.mydomain.com"
+			);
+			res.set("X-Frame-Options", "SAMEORIGIN");
+			res.set("X-XSS-Protection", "1; mode=block");
+			res.set("X-Content-Type-Options", "nosniff");
+		},
+	})
+);
 
-// Configure a middleware for 404s and the error handler
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.get(["/", "/*"], function (req, res, next) {
+	res.set("Content-Security-Policy", "connect-src https://*.mydomain.com");
+	res.set("X-Frame-Options", "SAMEORIGIN");
+	res.set("X-XSS-Protection", "1; mode=block");
+	res.set("X-Content-Type-Options", "nosniff");
+	res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 const port = process.env.PORT || 5678;
 app.listen(port, () => {

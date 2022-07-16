@@ -3,10 +3,19 @@
 	let name = "";
 	let githubLink = "";
 	let currentString = "";
-	let strings = ["blockchain engineer", "web developer", "student"];
+	let strings = [];
 	import { github_username } from "../store";
-
+	import About from "./About.svelte";
+	// import A1 from "./templates/1.svelte";
+	import fetch_user_data from "../helpers/fetch_user_data";
+	import { onMount } from "svelte";
 	$github_username = "Test";
+
+	onMount(async () => {
+		const user_data = await fetch_user_data("leomet07");
+
+		console.log(user_data);
+	});
 </script>
 
 <svelte:head>
@@ -21,8 +30,8 @@
 <div class="root">
 	<div class="editor">
 		<h1 class="header">Editor</h1>
+
 		<div class="divider" />
-		<h1>{$github_username}</h1>
 		<div class="info">
 			<label class="label">First Name</label>
 			<input
@@ -55,27 +64,32 @@
 				/>
 				<button
 					class="add"
-					onclick={() => {
+					on:click={() => {
 						if (currentString.length > 0) {
-							strings.push(currentString);
+							// strings.push(currentString);
+							strings = [...strings, currentString];
 							currentString = "";
+							console.log(strings);
 						}
 					}}>+</button
 				>
 			</div>
 			<div class="strings">
-				{#each strings as string}
+				{#each strings as string, index}
 					<div style="display: flex; align-items: center">
 						<span class="string-text">{string}</span>
 						<button
 							class="remove"
-							onclick={() => {
-								strings.splice(strings.indexOf(string), 1);
+							on:click={() => {
+								strings.pop(index);
+								console.log(strings);
+								strings = strings;
 							}}>-</button
 						>
 					</div>
 				{/each}
 			</div>
+			<button class="next-button">Next</button>
 		</div>
 	</div>
 	<div class="preview">
@@ -185,5 +199,27 @@
 	.remove:hover {
 		background-color: #c25eff;
 		cursor: pointer;
+	}
+	.next-button {
+		position: absolute;
+		bottom: 1rem;
+		left: 25%;
+		transform: translateX(-50%);
+		width: 12rem;
+		height: 2.5rem;
+		background-color: #212327;
+		border: none;
+		color: white;
+		font-family: "IBM Plex Mono", sans-serif;
+		font-weight: 400;
+		border-radius: 1rem;
+	}
+	.next-button:hover {
+		background-color: #c25eff;
+		cursor: pointer;
+	}
+
+	textarea {
+		resize:none;
 	}
 </style>

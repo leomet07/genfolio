@@ -1,25 +1,43 @@
-<div class="root">
-	<div class="grid-container">
-		<div class="item1">
-			Choose a Template
+<script>
+</script>
 
+<div class="root">
+	<div class="item1">Choose a Template</div>
+	<div class="grid-container">
+		<div class="grid-item">
+			<p class="ttext">Template 1 Name</p>
+			<button
+				class="templatebutton"
+				onclick="
+			location.href='templates/1';
+			">Use</button
+			>
 		</div>
-		<div class="item2">
-			Template 1
-			<a href="" id="templatebutton">Use</a>
+		<div class="grid-item">
+			<p class="ttext">Template 2 Name</p>
+			<button
+				class="templatebutton"
+				onclick="
+			location.href='templates/2';
+			">Use</button
+			>
 		</div>
-		<div class="item3">
-			Template 2
-			<a href="" id="templatebutton">Use</a>
-		</div>
-		<div class="item4">
-			Template 3
-			<a href="" id="templatebutton">Use</a>
+		<div class="grid-item">
+			<p class="ttext">Template 3 Name</p>
+			<button
+				class="templatebutton"
+				onclick="
+			location.href='templates/3';
+			">Use</button
+			>
 		</div>
 	</div>
 </div>
 
-<!--Working on styling for this page-->
+<!--
+1. Style the title
+2. Style the grid (90% should be preview image, and the other 10% should be the button, and a title) or anim (PAIN)
+-->
 <style>
 	.root {
 		height: 100vh;
@@ -28,44 +46,20 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		flex-direction: column;
 		margin: 0;
 		padding: 0;
 	}
-	.item1 {
-		grid-area: header;
-	}
-	.item2 {
-		grid-area: t1;
-		position: relative;
-	}
-	.item3 {
-		grid-area: t2;
-		position: relative;
-	}
-	.item4 {
-		grid-area: t3;
-		position: relative;
-	}
 
 	.grid-container {
-		height: 100vh;
-		width: 100vw;
 		display: grid;
-		grid-template-areas:
-			"header header header header header header"
-			"t1 t1 t2 t2 t3 t3"
-			"t1 t1 t2 t2 t3 t3"
-			"t1 t1 t2 t2 t3 t3";
-		gap: 10px;
+		width: 70%;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 10px;
+		margin: 0;
+		padding: 0;
 	}
-
-	.grid-container > div {
-		background-color: rgba(255, 255, 255, 0.8);
-		text-align: center;
-		padding: 20px 0;
-		font-size: 30px;
-	}
-	#templatebutton {
+	.templatebutton {
 		background-color: #c25eff;
 		border: none;
 		color: white;
@@ -76,26 +70,28 @@
 		font-size: 16px;
 		margin: 30px;
 		border-radius: 7px;
-		position: absolute;
-		right: 0;
-		bottom: 0;
+		font-family: "Inter";
+		font-weight: 500;
+		opacity:0;
+		transition: opacity 0.5s;
 	}
-	.description {
-		width: 50%;
-		color: #b2bac2;
-		font-family: "IBM Plex Mono", sans-serif;
+	.grid-item:hover .ttext {
+		opacity: 1;
 	}
-	.header {
-		color: white;
-		font-size: 2em;
-		font-weight: bold;
-		text-align: center;
+	.grid-item:hover .templatebutton {
+		opacity: 1;
+	}
+	.ttext {
+		opacity: 0;
+		transition: opacity 0.5s;
 	}
 
-	.gradient {
-		color: white;
-		font-family: "Inter", sans-serif;
-		font-weight: 800;
-		font-size: 5rem;
+	.grid-item {
+		height: 50vh;
+		background-color: blue;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 	}
 </style>
