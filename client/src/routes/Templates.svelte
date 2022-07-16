@@ -1,20 +1,39 @@
+<script>
+	import { template_id } from "../store";
+</script>
+
 <div class="root">
 	<div class="grid-container">
-		<div class="item1">
-			Choose a Template
-
-		</div>
+		<div class="item1">Choose a Template</div>
 		<div class="item2">
 			Template 1
-			<a href="" id="templatebutton">Use</a>
+			<button
+				id="templatebutton"
+				onclick="
+			$template_id = 1;
+			location.href='q1';
+			">Use</button
+			>
 		</div>
 		<div class="item3">
 			Template 2
-			<a href="" id="templatebutton">Use</a>
+			<button
+				id="templatebutton"
+				onclick="
+			$template_id = 2;
+			location.href='q1';
+			">Use</button
+			>
 		</div>
 		<div class="item4">
 			Template 3
-			<a href="" id="templatebutton">Use</a>
+			<button
+				id="templatebutton"
+				onclick="
+			$template_id = 3;
+			location.href='q1';
+			">Use</button
+			>
 		</div>
 	</div>
 </div>
@@ -46,7 +65,9 @@
 		grid-area: t3;
 		position: relative;
 	}
-
+	button {
+		cursor: pointer;
+	}
 	.grid-container {
 		height: 100vh;
 		width: 100vw;
