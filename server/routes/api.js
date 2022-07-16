@@ -13,7 +13,7 @@ router.get("/shallow_user", async (req, res, next) => {
 			throw new Error("No GitHub username specified. ");
 		}
 
-		const user_data = await get_user_shallow(github_username);
+		const user_data = await get_user_shallow(github_username).catch(err => {throw new Error(err)});
 
 		return res.json({
 			success: true,
@@ -37,7 +37,7 @@ router.post("/generate_site", async (req, res, next) => {
 			throw new Error("No GitHub repositories specified. ")
 		}
 
-		const user_data = await get_repos(repos);
+		const user_data = await get_repos(repos).catch(err => {throw new Error(err)});
 
 		const template_success = await copy_template("one", github_username);
 
