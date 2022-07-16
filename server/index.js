@@ -28,8 +28,10 @@ if (process.env.SSL == "true") {
 // import Routes
 const apiRouter = require("./routes/api").router;
 
+app.use("/site", express.static("sites"));
 //Routes Middleware
 app.use("/api/", apiRouter);
+
 app.get("/", function (req, res) {
 	res.json({ message: "Hello World to the project" });
 });
