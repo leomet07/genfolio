@@ -1,5 +1,7 @@
-const { get_user_data } = require("./github_api");
+const gh = require("./github_api");
 
 (async function () {
-	console.log(await get_user_data("leomet07"));
+	// console.log(await gh.get_repos([{'owner': "leomet07", 'name': "hackathon-practice"}]));
+	// console.log(await gh.get_user_repos_shallow("TheEgghead27"));
+	console.log(await gh.get_user_shallow("leomet07"));
 })();
