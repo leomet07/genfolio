@@ -28,18 +28,18 @@ async function handled_gql(query, body) {
 async function get_user_shallow(username) {
 	// @param username: String representing the user's GitHub username (potentially provided with OAuth2 if we have the time)
 	// returns a somewhat minimized Object representing the user with some relevant profile data
-	// TODO: handle request errors :)
-	const user = await session.request(`GET /users/${username}`).then((res) => {
+	const user = await handled_rest(`GET /users/${username}`).then(res =>
+	{
 		return {
-			username: res.data.login,
-			name: res.data.name,
-			pfp: res.data.avatar_url,
-			url: res.data.html_url,
-			bio: res.data.bio,
-			followers: res.data.followers,
-			public_repos: res.data.public_repos,
-			repos: [],
-		};
+			"username": res.login,
+			"name": res.name,
+			"pfp": res.avatar_url,
+			"url": res.html_url,
+			"bio": res.bio,
+			"followers": res.followers,
+			"public_repos": res.public_repos,
+			"repos": []
+		}
 	});
 
 	// get all repos using a while loop (to respect GitHub pagination limits)
