@@ -247,10 +247,21 @@
 					class="next-button"
 					on:click={() => {
 						console.log("The social media that was entered: ");
-						// page = "page4";
-					}}>Next</button
+						send_data();
+						page = "page4";
+					}}>Finish</button
 				>
 			</div>
+		{/if}
+		{#if page === "page4"}
+			<h1 class="header">Done!</h1>
+			<h3 class="subheader">
+				View your site at <a
+					target="_blank"
+					href={"https://genfolio.xyz/site/" + $github_username}
+					>{"genfolio.xyz/site/" + $github_username}</a
+				>
+			</h3>
 		{/if}
 	</div>
 	<div class="preview">
@@ -309,6 +320,11 @@
 		font-family: "IBM Plex Mono", sans-serif;
 		font-weight: 400;
 		margin-top: 1rem;
+	}
+
+	.subheader a {
+		color: white;
+		text-decoration: underline;
 	}
 	.divider {
 		width: 80%;
