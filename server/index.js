@@ -38,8 +38,8 @@ app.use("/site", express.static(__dirname + "/sites", {
 			"connect-src https://*.mydomain.com"
 		);
 		// res.set("X-Frame-Options", "SAMEORIGIN");
-		res.set("X-XSS-Protection", "1; mode=block");
-		res.set("X-Content-Type-Options", "nosniff");
+		// res.set("X-XSS-Protection", "1; mode=block");
+		// res.set("X-Content-Type-Options", "nosniff");
 	},
 }));
 
@@ -51,8 +51,8 @@ app.use("/dev_templates", express.static(__dirname + "/templates", {
 			"connect-src https://*.mydomain.com"
 		);
 		// res.set("X-Frame-Options", "SAMEORIGIN");
-		res.set("X-XSS-Protection", "1; mode=block");
-		res.set("X-Content-Type-Options", "nosniff");
+		// res.set("X-XSS-Protection", "1; mode=block");
+		// res.set("X-Content-Type-Options", "nosniff");
 	},
 }));
 
@@ -68,8 +68,8 @@ app.use(
 				"connect-src https://*.mydomain.com"
 			);
 			// res.set("X-Frame-Options", "SAMEORIGIN");
-			res.set("X-XSS-Protection", "1; mode=block");
-			res.set("X-Content-Type-Options", "nosniff");
+			// res.set("X-XSS-Protection", "1; mode=block");
+			// res.set("X-Content-Type-Options", "nosniff");
 		},
 	})
 );
@@ -77,8 +77,8 @@ app.use(
 app.get(["/", "/*"], function (req, res, next) {
 	res.set("Content-Security-Policy", "connect-src https://*.mydomain.com");
 	// res.set("X-Frame-Options", "SAMEORIGIN");
-	res.set("X-XSS-Protection", "1; mode=block");
-	res.set("X-Content-Type-Options", "nosniff");
+	// res.set("X-XSS-Protection", "1; mode=block");
+	// res.set("X-Content-Type-Options", "nosniff");
 	res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
