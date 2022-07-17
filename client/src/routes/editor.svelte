@@ -283,6 +283,13 @@
 					>{"genfolio.xyz/site/" + $github_username}</a
 				>
 			</h3>
+			<h3 class="subheader">
+				Download the site's soure code <a
+					target="_blank"
+					href={"https://genfolio.xyz/api/download_site/" + $github_username}
+					>here</a
+				>
+			</h3>
 		{/if}
 	</div>
 	<div class="preview">
