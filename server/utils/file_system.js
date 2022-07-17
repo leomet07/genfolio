@@ -75,8 +75,8 @@ async function edit_files(github_username, data) {
 				`
 						<div class="project">
 							<a href="${repo.url}">
-								<h2 class="project_name">Name: ${repo.name}</h2>
-								<h2 class="project_name">Language: ${repo.language}</h2>
+								<h2 class="project_name">${repo.name}</h2>
+								<h2 class="project_name">${repo.language}</h2>
 							</a>
 						</div>
 				`;
