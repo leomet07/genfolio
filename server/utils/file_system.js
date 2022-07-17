@@ -23,57 +23,68 @@ async function copy_template(template, new_name) {
 	return success;
 }
 
-async function edit_files(github_username, repos, template, name, bio, tags) {
+async function edit_files(github_username, data) {
+	let { repos, template, name, bio, tags } = data;
 	console.log(`Editing the files, based off template ${template}...`);
-
 
 	let indexpath = path.join("sites", github_username, "index.html");
 	const indexhtml = await fs.promises.readFile(indexpath, "utf8");
 
 	let $ = cheerio.load(String(indexhtml));
 
-	$("#name").text(name);
-	$("#bio").text(bio);
-
-	$("#description_tags").html(
-		tags.map((v) => `<span class="hidden_span">${v}</span>`)
-	);
+	if (name) {
+		$("#name").text(name);
+	}
+	if (bio){
+		$("#bio").text(bio);
+	}
+	if (tags){
+		$("#description_tags").html(
+			tags.map((v) => `<span class="hidden_span">${v}</span>`)
+		);
+	}
+	
 
 	$("#github_link").attr("href", "https://github.com/" + github_username);
 
 	await fs.promises.writeFile(indexpath, $.root().html());
 
-	let projectspath = path.join("sites", github_username, "projects" , "index.html");
+	let projectspath = path.join(
+		"sites",
+		github_username,
+		"projects",
+		"index.html"
+	);
 	const projectshtml = await fs.promises.readFile(projectspath, "utf8");
 
 	$ = cheerio.load(String(projectshtml));
-
-	$("#name").text(name);
 	
+	if (name){
+		$("#name").text(name);
+	}
 
 	$("#github_link").attr("href", "https://github.com/" + github_username);
-	
-	let added_up_divs = "";
-	for (let i = 0; i < repos.length; i++) {
-		let repo = repos[i];
 
-		added_up_divs =
-			added_up_divs +
-			`
-					<div class="project">
-						<h2>Name: ${repo.name}</h2>
-						<h2>URL: ${repo.url}</h2>
-						<h2>Language: ${repo.language}</h2>
-					</div>
-			`;
+	if (repos){
+		let added_up_divs = "";
+		for (let i = 0; i < repos.length; i++) {
+			let repo = repos[i];
+	
+			added_up_divs =
+				added_up_divs +
+				`
+						<div class="project">
+							<h2>Name: ${repo.name}</h2>
+							<h2>URL: ${repo.url}</h2>
+							<h2>Language: ${repo.language}</h2>
+						</div>
+				`;
+		}
+		$("#projects").html(added_up_divs);
 	}
-	$("#projects").html(added_up_divs);
-
-	await fs.promises.writeFile(projectspath, $.root().html());
-
-
-
 	
+	
+	await fs.promises.writeFile(projectspath, $.root().html());
 
 	// Write the edited page
 

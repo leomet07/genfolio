@@ -43,36 +43,15 @@ router.post("/generate_site", async (req, res, next) => {
 		if (!github_username) {
 			throw new Error("No GitHub username specified. ");
 		}
-		if (!repos) {
-			throw new Error("No GitHub repositories specified. ");
-		}
-		if (!template) {
-			throw new Error("No template specified.");
-		}
-		if (!name) {
-			throw new Error("No name specified.");
-		}
-		if (!bio) {
-			throw new Error("No bio specified.");
-		}
-		if (!tags) {
-			throw new Error("No tags specified.");
-		}
 
 		const template_success = await copy_template(template, github_username);
 
 		if (!template_success) {
 			throw new Error("Something went wrong!");
 		}
-
-		const edit_success = await edit_files(
-			github_username,
-			repos,
-			template,
-			name,
-			bio,
-			tags
-		);
+		data = { repos, template, name, bio, tags };
+		
+		const edit_success = await edit_files(github_username, data);
 		const rooturl = process.env.DEV
 			? "http://localhost:5678"
 			: "https://genfolio.xyz";
