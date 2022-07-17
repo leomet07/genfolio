@@ -58,6 +58,9 @@ router.post("/generate_site", async (req, res, next) => {
 		const name = req.body.name;
 		const bio = req.body.bio;
 		const tags = req.body.tags;
+		const devpost_username = req.body.devpost_username;
+		const instagram_username = req.body.instagram_username;
+		const linkedin_username = req.body.linkedin_username;
 
 		if (!github_username) {
 			throw new Error("No GitHub username specified. ");
@@ -78,7 +81,7 @@ router.post("/generate_site", async (req, res, next) => {
 		if (!template_success) {
 			throw new Error("Something went wrong!");
 		}
-		data = { repos, template, name, bio, tags };
+		data = { repos, template, name, bio, tags, devpost_username, instagram_username, linkedin_username};
 
 		const edit_success = await edit_files(github_username, data);
 		const rooturl = process.env.DEV

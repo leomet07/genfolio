@@ -24,7 +24,16 @@ async function copy_template(template, new_name) {
 }
 
 async function edit_files(github_username, data) {
-	let { repos, template, name, bio, tags } = data;
+	let {
+		repos,
+		template,
+		name,
+		bio,
+		tags,
+		devpost_username,
+		instagram_username,
+		linkedin_username,
+	} = data;
 	console.log(`Editing the files, based off template ${template}...`);
 
 	let indexpath = path.join("sites", github_username, "index.html");
@@ -46,6 +55,9 @@ async function edit_files(github_username, data) {
 	}
 
 	$("#github_link").attr("href", "https://github.com/" + github_username);
+	$("#devpost_link").attr("href", "https://devpost.com/" + devpost_username);
+	$("#instagram_link").attr("href", "https://instagram.com/" + instagram_username);
+	$("#linkedin_link").attr("href", "https://www.linkedin.com/in/" + linkedin_username);
 
 	await fs.promises.writeFile(indexpath, $.root().html());
 
@@ -65,6 +77,9 @@ async function edit_files(github_username, data) {
 	}
 
 	$("#github_link").attr("href", "https://github.com/" + github_username);
+	$("#devpost_link").attr("href", "https://devpost.com/" + devpost_username);
+	$("#instagram_link").attr("href", "https://instagram.com/" + instagram_username);
+	$("#linkedin_link").attr("href", "https://www.linkedin.com/in/" + linkedin_username);
 
 	if (repos) {
 		let added_up_divs = "";
