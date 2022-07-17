@@ -6,7 +6,8 @@ const {
 } = require("../utils/github_api");
 const middlewares = require("../middlewares");
 const rateLimit = require("express-rate-limit");
-
+const fs = require("fs-extra");
+const path = require("path");
 router.get("/", (req, res) => {
 	res.json({ message: "Hello world from /api." });
 });
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
 // GitHub shallow_user rate limit: 10 requests / 300 seconds
 const ghUserLimit = rateLimit({
 	max: 10,
-	windowMs: 5 * 60 * 1000,  // 5 minutes
+	windowMs: 5 * 60 * 1000, // 5 minutes
 
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
@@ -28,8 +29,10 @@ const shallow_user_handler = async (req, res, next) => {
 
 		const doesUserExist = await check_if_user_exists(github_username);
 
-		if (!doesUserExist){
-			throw new Error("Github user " + github_username + " does not exist.")
+		if (!doesUserExist) {
+			throw new Error(
+				"Github user " + github_username + " does not exist."
+			);
 		}
 
 		const user_data = await get_user_shallow(github_username).catch(
@@ -68,8 +71,10 @@ router.post("/generate_site", async (req, res, next) => {
 
 		const doesUserExist = await check_if_user_exists(github_username);
 
-		if (!doesUserExist){
-			throw new Error("Github user " + github_username + " does not exist.")
+		if (!doesUserExist) {
+			throw new Error(
+				"Github user " + github_username + " does not exist."
+			);
 		}
 
 		if (!template) {
@@ -81,7 +86,16 @@ router.post("/generate_site", async (req, res, next) => {
 		if (!template_success) {
 			throw new Error("Something went wrong!");
 		}
-		data = { repos, template, name, bio, tags, devpost_username, instagram_username, linkedin_username};
+		data = {
+			repos,
+			template,
+			name,
+			bio,
+			tags,
+			devpost_username,
+			instagram_username,
+			linkedin_username,
+		};
 
 		const edit_success = await edit_files(github_username, data);
 		const rooturl = process.env.DEV
@@ -90,6 +104,30 @@ router.post("/generate_site", async (req, res, next) => {
 		return res.json({
 			success: true,
 			site: rooturl + "/site/" + github_username,
+		});
+	} catch (error) {
+		next(error);
+	}
+});
+
+router.get("/download_site/:username", async (req, res, next) => {
+	try {
+		const username = req.params.username;
+		if (!username) {
+			throw new Error("Username not specified.");
+		}
+
+		const checkpath = path.join("sites", username);
+
+		if (!fs.existsSync(checkpath)) {
+			throw new Error(`${username}'s site does not exist!`);
+		}
+
+		res.zip({
+			files: [
+				{ path: checkpath, name: username }, 
+			],
+			filename: "site.zip",
 		});
 	} catch (error) {
 		next(error);
