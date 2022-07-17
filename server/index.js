@@ -12,7 +12,7 @@ const get_running_server_info = require("./utils/get_running_server_info")
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(helmet());
+// app.use(helmet());
 app.use(morgan("tiny"));
 
 // Only redirect to SSL if developer allows and states that machine running this has SSL to prevent crashes on computers without SSL
