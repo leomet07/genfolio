@@ -43,6 +43,9 @@ router.post("/generate_site", async (req, res, next) => {
 		if (!github_username) {
 			throw new Error("No GitHub username specified. ");
 		}
+		if (!template){
+			throw new Error("No template specified. ");
+		}
 
 		const template_success = await copy_template(template, github_username);
 
