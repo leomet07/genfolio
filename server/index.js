@@ -90,8 +90,5 @@ app.get(["/", "/*"], function (req, res, next) {
 
 const port = get_running_server_info.get_server_running_port();
 app.listen(port, () => {
-	console.log(
-		"Sever is up and running at " +
-			get_running_server_info.get_server_running_url()
-	);
+	console.log("Server is up and running at " + get_running_server_info.get_server_running_url());
 });

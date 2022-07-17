@@ -169,7 +169,7 @@
 			<div class="info">
 				<h2 class="repo-select-info">
 					<spans style="color: #c25eff">{reposSelected.length}</spans>
-					of 6 repos selected
+					repos selected, of up to 6
 				</h2>
 				<input
 					on:keyup={(e) => {
@@ -211,8 +211,12 @@
 			<button
 				class="next-button"
 				on:click={() => {
-					send_data();
-					page = "page3";
+					if (reposSelected > 0) {
+						send_data();
+						page = "page3";
+					} else {
+						alert("You didn't select any of your Github repositories! Go back and add at least one.")
+					}
 				}}>Next</button
 			>
 		{/if}
