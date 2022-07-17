@@ -8,7 +8,7 @@ npm install
 
 npm run build
 
-cp -r public/ ../server/
+cp -rf public/ ../server/
 
 cd ..
 
