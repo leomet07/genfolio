@@ -58,6 +58,7 @@ async function get_user_shallow(username) {
 				name: repo.full_name,
 				url: repo.html_url,
 				stars: repo.stargazers_count,
+				language : repo.language
 			};
 		});
 		user.repos = [...user.repos, ...repoPage];
