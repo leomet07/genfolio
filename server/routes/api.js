@@ -5,11 +5,20 @@ const {
 	check_if_user_exists,
 } = require("../utils/github_api");
 const middlewares = require("../middlewares");
+const rateLimit = require("express-rate-limit");
 
 router.get("/", (req, res) => {
 	res.json({ message: "Hello world from /api." });
 });
 
+// GitHub shallow_user rate limit: 10 requests / 300 seconds
+const ghUserLimit = rateLimit({
+	max: 10,
+	windowMs: 5 * 60 * 1000,  // 5 minutes
+
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
 const shallow_user_handler = async (req, res, next) => {
 	try {
 		const github_username = req.body.github_username;
@@ -37,9 +46,10 @@ const shallow_user_handler = async (req, res, next) => {
 		next(error);
 	}
 };
-router.get("/shallow_user", shallow_user_handler);
-router.post("/shallow_user", shallow_user_handler);
+router.get("/shallow_user", ghUserLimit, shallow_user_handler);
+router.post("/shallow_user", ghUserLimit, shallow_user_handler);
 
+// site generation rate limit: 60 requests / 60 seconds  (implicit, inherited from full express() app)
 router.post("/generate_site", async (req, res, next) => {
 	try {
 		const github_username = req.body.github_username;

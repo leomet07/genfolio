@@ -4,6 +4,7 @@ const helmet = require("helmet");
 // const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 const app = express();
@@ -16,8 +17,10 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 // Only redirect to SSL if developer allows and states that machine running this has SSL to prevent crashes on computers without SSL
-if (process.env.SSL == "true") {
+if (process.env.SSL === "true") {
 	app.enable("trust proxy");
+	// proxy (ip) forwarding settings, important for rate limits
+	app.set('trust proxy', 2)
 
 	app.use(function (req, res, next) {
 		if (req.headers["x-forwarded-proto"] === "https") {
@@ -26,6 +29,16 @@ if (process.env.SSL == "true") {
 		res.redirect("https://" + req.headers.host + req.url);
 	});
 }
+
+// site-wide rate limit: 60 requests / 60 seconds
+const baseLimit = rateLimit({
+	max: 60,
+	windowMs: 60 * 1000,
+
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+app.use(baseLimit);
 
 // import Routes
 const apiRouter = require("./routes/api").router;
@@ -62,7 +75,7 @@ app.use(
 	})
 );
 
-//Routes Middleware
+// Routes Middleware
 app.use("/api/", apiRouter);
 
 app.use(
