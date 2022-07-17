@@ -13,6 +13,7 @@
 			>Templates</a
 		>
 	</div>
+	<img src="/img/banner.jpg" class="logo" />
 </div>
 
 <style>
@@ -67,5 +68,11 @@
 		font-family: "Inter", sans-serif;
 		font-weight: 800;
 		font-size: 5rem;
+	}
+	.logo {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 10vw;
 	}
 </style>

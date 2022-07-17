@@ -135,5 +135,6 @@
 		margin: 10px;
 		border: 1px solid rgb(39, 36, 36);
 		border-radius: 3%;
+		background-position: center;
 	}
 </style>

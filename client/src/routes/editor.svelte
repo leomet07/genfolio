@@ -238,7 +238,6 @@
 		{#if page === "page3"}
 			<h1 class="header">Other Platforms</h1>
 			<div class="divider" />
-			<h3 class="subheader">All of these are optional.</h3>
 			<div class="info">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label class="label">Devpost Username</label>
