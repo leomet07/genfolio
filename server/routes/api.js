@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
 	res.json({ message: "Hello world from /api." });
 });
 
-router.get("/shallow_user", async (req, res, next) => {
+const shallow_user_handler = async (req, res, next) => {
 	try {
 		const github_username = req.body.github_username;
 		if (!github_username) {
@@ -27,7 +27,9 @@ router.get("/shallow_user", async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
-});
+}
+router.get("/shallow_user", shallow_user_handler);
+router.post("/shallow_user", shallow_user_handler);
 
 router.post("/generate_site", async (req, res, next) => {
 	try {
