@@ -8,7 +8,7 @@ require("dotenv").config();
 
 const app = express();
 
-const get_running_server_info = require("./utils/get_running_server_info")
+const get_running_server_info = require("./utils/get_running_server_info");
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -30,31 +30,37 @@ if (process.env.SSL == "true") {
 // import Routes
 const apiRouter = require("./routes/api").router;
 
-app.use("/site", express.static(__dirname + "/sites", {
-	setHeaders: function (res, path, stat) {
-		res.set("Access-Control-Allow-Origin", "*");
-		res.set(
-			"Content-Security-Policy",
-			"connect-src https://*.mydomain.com"
-		);
-		// res.set("X-Frame-Options", "SAMEORIGIN");
-		// res.set("X-XSS-Protection", "1; mode=block");
-		// res.set("X-Content-Type-Options", "nosniff");
-	},
-}));
+app.use(
+	"/site",
+	express.static(__dirname + "/sites", {
+		setHeaders: function (res, path, stat) {
+			res.set("Access-Control-Allow-Origin", "*");
+			res.set(
+				"Content-Security-Policy",
+				"connect-src https://*.genfolio.xyz"
+			);
+			// res.set("X-Frame-Options", "SAMEORIGIN");
+			// res.set("X-XSS-Protection", "1; mode=block");
+			// res.set("X-Content-Type-Options", "nosniff");
+		},
+	})
+);
 
-app.use("/dev_templates", express.static(__dirname + "/templates", {
-	setHeaders: function (res, path, stat) {
-		res.set("Access-Control-Allow-Origin", "*");
-		res.set(
-			"Content-Security-Policy",
-			"connect-src https://*.mydomain.com"
-		);
-		// res.set("X-Frame-Options", "SAMEORIGIN");
-		// res.set("X-XSS-Protection", "1; mode=block");
-		// res.set("X-Content-Type-Options", "nosniff");
-	},
-}));
+app.use(
+	"/dev_templates",
+	express.static(__dirname + "/templates", {
+		setHeaders: function (res, path, stat) {
+			res.set("Access-Control-Allow-Origin", "*");
+			res.set(
+				"Content-Security-Policy",
+				"connect-src https://*.genfolio.xyz"
+			);
+			// res.set("X-Frame-Options", "SAMEORIGIN");
+			// res.set("X-XSS-Protection", "1; mode=block");
+			// res.set("X-Content-Type-Options", "nosniff");
+		},
+	})
+);
 
 //Routes Middleware
 app.use("/api/", apiRouter);
@@ -65,7 +71,7 @@ app.use(
 			res.set("Access-Control-Allow-Origin", "*");
 			res.set(
 				"Content-Security-Policy",
-				"connect-src https://*.mydomain.com"
+				"connect-src https://*.genfolio.xyz"
 			);
 			// res.set("X-Frame-Options", "SAMEORIGIN");
 			// res.set("X-XSS-Protection", "1; mode=block");
@@ -75,7 +81,7 @@ app.use(
 );
 
 app.get(["/", "/*"], function (req, res, next) {
-	res.set("Content-Security-Policy", "connect-src https://*.mydomain.com");
+	res.set("Content-Security-Policy", "connect-src https://*.genfolio.xyz");
 	// res.set("X-Frame-Options", "SAMEORIGIN");
 	// res.set("X-XSS-Protection", "1; mode=block");
 	// res.set("X-Content-Type-Options", "nosniff");
@@ -84,5 +90,8 @@ app.get(["/", "/*"], function (req, res, next) {
 
 const port = get_running_server_info.get_server_running_port();
 app.listen(port, () => {
-	console.log("Sever is up and running at " + get_running_server_info.get_server_running_url());
+	console.log(
+		"Sever is up and running at " +
+			get_running_server_info.get_server_running_url()
+	);
 });
