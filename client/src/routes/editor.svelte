@@ -284,7 +284,7 @@
 				>
 			</h3>
 			<h3 class="subheader">
-				Download the site's soure code <a
+				Download the site's source code <a
 					target="_blank"
 					href={"https://genfolio.xyz/api/download_site/" + $github_username}
 					>here</a
