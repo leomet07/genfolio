@@ -11,10 +11,15 @@
 }
 
 .main-content {
-    margin: 15rem 0 0 10rem;
+	width : 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+   	margin: auto;
 }
 
-.title_name {
+.name {
     color: rgb(254, 91, 119);
     font-family: "Outfit", sans-serif;
     font-weight: 200;
@@ -26,25 +31,21 @@
     font-family: "Outfit", sans-serif;
     font-weight: 700;
     font-size: 4rem;
-    width: 100%;
-    margin-bottom: 2rem;
+   
     
 }
 
-#typewriter_div {
-   width: max-content;
-   display: inline-block;
-}
 
-.projects-button {
+.home-button {
+	margin-top: 20px;
     background-color: rgb(108, 86, 210);
     border: none;
     outline: none;
     color: white;
     font-size: 1rem;
     font-family: "Outfit", sans-serif;
-	padding: 10px;
+    margin-top: 3rem;
+    padding : 10px;
+    text-decoration: none ;
     border-radius: 10px;
-    margin-top: 40px;
-	text-decoration: none;
 }
