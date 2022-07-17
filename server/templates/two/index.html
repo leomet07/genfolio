@@ -3,39 +3,64 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-        <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.19.0/core.min.js"
-        integrity="sha512-t4NGjfaRaGCjmiTGBsiG3w8FCp8ZY7dPlwZAXfeoGPARUT/rt3OP0NpQkblSgZy/2R8vPTXiEcq/zcWIJ8NusQ=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer">
-        </script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.19.0/core.min.js"
+			integrity="sha512-t4NGjfaRaGCjmiTGBsiG3w8FCp8ZY7dPlwZAXfeoGPARUT/rt3OP0NpQkblSgZy/2R8vPTXiEcq/zcWIJ8NusQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
 		<script src="script.js"></script>
 
 		<title>Svelte app</title>
 		<link rel="stylesheet" href="styles.css" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<main>
-            <div class="root">
-                <div class="main-content">
-                    <h2 class="title_name">Hey there, I'm <span id="name">John</span></h2>
-                        <h1 class="title">
-                            <span id="bio">Some words that describe me <br/> and my style are</span>
-                            <span style="color: rgb(254, 91, 119)"> <div id="typewriter_div"></div></span>
-                        </h1>
-                    <a href="projects/" class="projects-button">See Projects</a>
-                </div>
-            </div>
+			<div class="root">
+				<div class="main-content">
+					<h2 class="title_name">
+						Hey there, I'm <span id="name">John</span>
+					</h2>
+					<h1 class="title">
+						<span id="bio"
+							>Some words that describe me <br />
+							and my style are</span
+						>
+						<span style="color: rgb(254, 91, 119)">
+							<div id="typewriter_div"></div
+						></span>
+					</h1>
+					<a href="projects/" class="projects-button">See Projects</a>
+					
+					<div id="socials">
+						<a id="github_link" class="projects-button" href=""
+							>Github</a
+						>
+						<a id="devpost_link" class="projects-button" href=""
+							>Devpost</a
+						>
+						<a id="instagram_link" class="projects-button" href=""
+							>Instagram</a
+						>
+						<a id="linkedin_link" class="projects-button" href=""
+							>Linkedin</a
+						>
+					</div>
+				</div>
+			</div>
 
-            <div style="display: none;" id="description_tags">
-                <span class="hidden_span">Creative</span>
-                <span class="hidden_span">Nerdy</span>
-                <span class="hidden_span">Smart</span>
-            </div>
+			<div style="display: none" id="description_tags">
+				<span class="hidden_span">Creative</span>
+				<span class="hidden_span">Nerdy</span>
+				<span class="hidden_span">Smart</span>
+			</div>
 		</main>
 	</body>
 </html>
