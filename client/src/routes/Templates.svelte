@@ -8,6 +8,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Templates</title>
+</svelte:head>
+
 <div class="root">
 	<div class="title">Choose a Template</div>
 	<div class="grid-container">

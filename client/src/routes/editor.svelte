@@ -45,12 +45,12 @@
 		);
 
 		console.log(site_url);
-		document.getElementById("preview_iframe").src += ""
+		document.getElementById("preview_iframe").src += "";
 	}
 	onMount(async () => {
 		console.log($templateid);
-		if (!$templateid){
-			navigate( "/templates", {replace : true})
+		if (!$templateid) {
+			navigate("/templates", { replace: true });
 		}
 
 		// Handle the logic for when the user is typing
@@ -73,6 +73,10 @@
 		typer.addEventListener("keyup", handleKeyUp);
 	});
 </script>
+
+<svelte:head>
+	<title>Editor</title>
+</svelte:head>
 
 <div class="root">
 	<div id="editor">
@@ -285,7 +289,7 @@
 		justify-content: center;
 	}
 
-	#preview_iframe{
+	#preview_iframe {
 		width: 100%;
 		height: 98%;
 	}
