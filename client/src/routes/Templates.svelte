@@ -17,7 +17,7 @@
 				class="templatebutton"
 				on:click={() => { goToTemplate('one')}}>Use</button>
 		</div>
-		<div class="grid-item">
+		<div class="grid-item" style="background-image: url('/img/previews/two.png');">
 			<p class="ttext">Template 2 Name</p>
 			<button
 				class="templatebutton"
