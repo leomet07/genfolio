@@ -187,20 +187,21 @@
 							<div
 								class="grid-item"
 								on:click={() => {
-									if (reposSelected.includes(index)) {
-										let id = reposSelected.indexOf(index);
+									if (reposSelected.includes(repos.indexOf(repo))) {
+										let id = reposSelected.indexOf(repos.indexOf(repo));
 										reposSelected.splice(id, 1);
 										reposSelected = reposSelected;
 									} else {
 										reposSelected = [
 											...reposSelected,
-											index,
+											repos.indexOf(repo),
 										];
 									}
+									console.log(repos.indexOf(repo), reposSelected)
 								}}
 							>
 								<h3 class="repo-title">{repo.name}</h3>
-								{#if reposSelected.includes(index)}
+								{#if reposSelected.includes(repos.indexOf(repo))}
 									<h4 style="color: #c25eff">selected</h4>
 								{/if}
 							</div>
@@ -211,7 +212,7 @@
 			<button
 				class="next-button"
 				on:click={() => {
-					if (reposSelected > 0) {
+					if (reposSelected.length > 0) {
 						send_data();
 						page = "page3";
 					} else {
