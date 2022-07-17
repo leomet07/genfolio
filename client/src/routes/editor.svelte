@@ -37,8 +37,8 @@
 			name,
 			tags: strings,
 			repos: send_repos,
-			devpost_username: $linkedin_username,
-			instagram_username: $linkedin_username,
+			devpost_username: $devpost_username,
+			instagram_username: $instagram_username,
 			linkedin_username: $linkedin_username,
 		};
 		const site_url = await submit_changes(
