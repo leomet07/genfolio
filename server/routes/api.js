@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const { copy_template, edit_files } = require("../utils/file_system");
-const { get_user_shallow } = require("../utils/github_api");
+const {
+	get_user_shallow,
+	check_if_user_exists,
+} = require("../utils/github_api");
 const middlewares = require("../middlewares");
 
 router.get("/", (req, res) => {
@@ -12,6 +15,12 @@ const shallow_user_handler = async (req, res, next) => {
 		const github_username = req.body.github_username;
 		if (!github_username) {
 			throw new Error("No GitHub username specified. ");
+		}
+
+		const doesUserExist = await check_if_user_exists(github_username);
+
+		if (!doesUserExist){
+			throw new Error("Github user " + github_username + " does not exist.")
 		}
 
 		const user_data = await get_user_shallow(github_username).catch(
@@ -43,7 +52,14 @@ router.post("/generate_site", async (req, res, next) => {
 		if (!github_username) {
 			throw new Error("No GitHub username specified. ");
 		}
-		if (!template){
+
+		const doesUserExist = await check_if_user_exists(github_username);
+
+		if (!doesUserExist){
+			throw new Error("Github user " + github_username + " does not exist.")
+		}
+
+		if (!template) {
 			throw new Error("No template specified. ");
 		}
 
@@ -53,7 +69,7 @@ router.post("/generate_site", async (req, res, next) => {
 			throw new Error("Something went wrong!");
 		}
 		data = { repos, template, name, bio, tags };
-		
+
 		const edit_success = await edit_files(github_username, data);
 		const rooturl = process.env.DEV
 			? "http://localhost:5678"

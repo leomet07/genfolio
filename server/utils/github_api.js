@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const octokit = require("octokit");
-
+const fetch = require("node-fetch")
 const session = new octokit.Octokit(
 	process.env.GH_TOKEN ? { auth: process.env.GH_TOKEN } : {}
 );
@@ -67,4 +67,10 @@ async function get_user_shallow(username) {
 	return user;
 }
 
-module.exports = { get_user_shallow };
+async function check_if_user_exists(username) {
+	const res = await fetch("https://api.github.com/users/" + username);
+	const rjson = await res.json()
+	return !(rjson.message == "Not Found");
+}
+
+module.exports = { get_user_shallow, check_if_user_exists };
