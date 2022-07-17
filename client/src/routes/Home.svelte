@@ -21,7 +21,6 @@
 		height: 100vh;
 		width: 100vw;
 		background-color: black;
-		display: flex;
 		justify-content: center;
 		align-items: center;
 		margin: 0;
@@ -39,7 +38,7 @@
 		font-size: 16px;
 		margin: 30px;
 		border-radius: 7px;
-		font-family: "Inter";
+		font-family: "Inter", sans-serif;
 		font-weight: 500;
 	}
 	.description {
