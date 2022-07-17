@@ -31,7 +31,7 @@
     font-family: "Outfit", sans-serif;
     font-weight: 700;
     font-size: 4rem;
-   
+    margin-bottom: 2rem;
     
 }
 
@@ -48,4 +48,31 @@
     padding : 10px;
     text-decoration: none ;
     border-radius: 10px;
+}
+
+#projects {
+	width: 70vw;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 1rem;
+}
+
+.project {
+	height: 25vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(18, 19, 30);
+	border-radius: 15px;
+    text-align: center;
+
+}
+
+.project_name {
+	color: white;
+	font-family: "IBM Plex Mono";
+	font-weight: 200;
+}
+a {
+	text-decoration: none;
 }

@@ -8,10 +8,17 @@
 	let repoSearch = "";
 	let reposSelected = [];
 	let sortedRepos = [];
-	import { github_username, templateid } from "../store";
-	import About from "./About.svelte";
-	// import A1 from "./templates/1.svelte";
+	import { navigate } from "svelte-routing";
+	import {
+		github_username,
+		templateid,
+		devpost_username,
+		instagram_username,
+		linkedin_username,
+	} from "../store";
+
 	import fetch_user_data from "../helpers/fetch_user_data";
+	import submit_changes from "../helpers/submit_changes";
 	import { onMount } from "svelte";
 
 	const setSortedRepos = () => {
@@ -22,26 +29,72 @@
 				.includes(repoSearch.toLowerCase());
 		});
 	};
+	async function send_data() {
+		console.log("Repos selected: ", reposSelected);
+		const send_repos = reposSelected.map((v) => repos[v]);
+		const data = {
+			bio,
+			name,
+			tags: strings,
+			repos: send_repos,
+		};
+		const site_url = await submit_changes(
+			$github_username,
+			$templateid,
+			data
+		);
 
+		console.log(site_url);
+		document.getElementById("preview_iframe").src += ""
+	}
 	onMount(async () => {
-		console.log($templateid);	
+		console.log($templateid);
+		if (!$templateid){
+			navigate( "/templates", {replace : true})
+		}
+
+		// Handle the logic for when the user is typing
+		let timer,
+			timeoutVal = 1000;
+		const handleKeyUp = async (e) => {
+			window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
+			timer = window.setTimeout(async () => {
+				console.log("All done typing!");
+				await send_data();
+			}, timeoutVal);
+		};
+		const handleKeyPress = async (e) => {
+			window.clearTimeout(timer);
+			console.log("Typing...");
+		};
+		const typer = document.getElementById("editor");
+		typer.addEventListener("keypress", handleKeyPress);
+		// triggers a check to see if the user is actually done typing
+		typer.addEventListener("keyup", handleKeyUp);
 	});
 </script>
 
 <div class="root">
-	<div class="editor">
+	<div id="editor">
 		{#if page === "page1"}
 			<button
 				class="next-button"
 				on:click={async () => {
+					try {
+						repos = (await fetch_user_data($github_username)).repos;
+					} catch (e) {
+						console.error(e);
+						alert(
+							"Something went wrong importing your github data! Check your username and try again."
+						);
+						return;
+					}
 					page = "page2";
-					repos = (await fetch_user_data($github_username)).repos;
 					sortedRepos = repos;
 				}}>Next</button
 			>
 
 			<h1 class="header">Editor</h1>
-
 			<div class="divider" />
 			<div class="info">
 				<label for="first_name_form" class="label">First Name</label>
@@ -52,27 +105,28 @@
 					placeholder="First Name"
 					id="first_name_form"
 				/>
-				<label class="label">Bio</label>
+				<label for="bio_form" class="label">Bio</label>
 				<textarea
 					bind:value={bio}
 					class="input"
 					placeholder="ex. I'm a student as x and I am currently building y"
 				/>
-				<label class="label">Github Username</label>
+				<label for="username_form" class="label">Github Username</label>
 				<input
 					bind:value={$github_username}
 					class="input"
 					type="text"
 					placeholder="ex. jmurphy5613"
 				/>
-
-				<label class="label">Animated Strings Input</label>
+				<label for="tag_form" class="label"
+					>Animated Strings Input</label
+				>
 				<div class="strings-input">
 					<input
 						bind:value={currentString}
 						class="input"
 						type="text"
-						placeholder="software engineer"
+						placeholder="ex. software engineer"
 					/>
 					<button
 						class="add"
@@ -150,13 +204,60 @@
 			<button
 				class="next-button"
 				on:click={() => {
+					send_data();
 					page = "page3";
 				}}>Next</button
 			>
 		{/if}
+		{#if page === "page3"}
+			<h1 class="header">Other Platforms</h1>
+			<div class="divider" />
+			<h3 class="subheader">All of these are optional.</h3>
+			<div class="info">
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<label class="label">Devpost Username</label>
+				<input
+					bind:value={$devpost_username}
+					class="input"
+					type="text"
+					placeholder="ex. jmurphy5613"
+				/>
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<label class="label">Instagram Username</label>
+				<input
+					bind:value={$instagram_username}
+					class="input"
+					type="text"
+					placeholder="ex. jmurphy5613"
+				/>
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<label class="label">LinkedIn Username</label>
+				<input
+					bind:value={$linkedin_username}
+					class="input"
+					type="text"
+					placeholder="ex. jmurphy5613"
+				/>
+
+				<button
+					class="next-button"
+					on:click={() => {
+						console.log("The social media that was entered: ");
+						// page = "page4";
+					}}>Next</button
+				>
+			</div>
+		{/if}
 	</div>
 	<div class="preview">
 		<!-- <h1 class="header">Preview</h1> -->
+		{#if $github_username}
+			<iframe
+				src={"https://genfolio.xyz/site/" + $github_username}
+				title=""
+				id="preview_iframe"
+			/>
+		{/if}
 	</div>
 </div>
 
@@ -168,7 +269,7 @@
 		width: 100vw;
 		display: flex;
 	}
-	.editor {
+	#editor {
 		width: 50%;
 		height: 100%;
 		background-color: rgb(0, 0, 0);
@@ -183,6 +284,12 @@
 		display: flex;
 		justify-content: center;
 	}
+
+	#preview_iframe{
+		width: 100%;
+		height: 98%;
+	}
+
 	.header {
 		color: white;
 		font-size: 2em;
@@ -190,6 +297,14 @@
 		font-family: "IBM Plex Mono", sans-serif;
 		font-weight: 400;
 		margin-top: 3rem;
+	}
+	.subheader {
+		color: white;
+		font-size: 1.4em;
+		text-align: center;
+		font-family: "IBM Plex Mono", sans-serif;
+		font-weight: 400;
+		margin-top: 1rem;
 	}
 	.divider {
 		width: 80%;
@@ -222,6 +337,9 @@
 		border: none;
 		border-radius: 0.25rem;
 		width: 100%;
+	}
+	.input:focus {
+		outline: none;
 	}
 	.strings-input {
 		width: 100%;
