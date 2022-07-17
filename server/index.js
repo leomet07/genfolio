@@ -19,6 +19,8 @@ app.use(morgan("tiny"));
 // Only redirect to SSL if developer allows and states that machine running this has SSL to prevent crashes on computers without SSL
 if (process.env.SSL === "true") {
 	app.enable("trust proxy");
+	// proxy (ip) forwarding settings, important for rate limits
+	app.set('trust proxy', 2)
 
 	app.use(function (req, res, next) {
 		if (req.headers["x-forwarded-proto"] === "https") {
