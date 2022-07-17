@@ -98,7 +98,10 @@
 				}}>Next</button
 			>
 
-			<h1 class="header">Editor</h1>
+			<h1 class="header">
+				Editor for Template {$templateid.charAt(0).toUpperCase() +
+					$templateid.slice(1)}
+			</h1>
 			<div class="divider" />
 			<div class="info">
 				<label for="first_name_form" class="label">First Name</label>
@@ -256,7 +259,7 @@
 		{#if page === "page4"}
 			<h1 class="header">Done!</h1>
 			<h3 class="subheader">
-				View your site at <a
+				Your site is hosted, for free, at <a
 					target="_blank"
 					href={"https://genfolio.xyz/site/" + $github_username}
 					>{"genfolio.xyz/site/" + $github_username}</a
