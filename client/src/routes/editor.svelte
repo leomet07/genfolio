@@ -37,6 +37,9 @@
 			name,
 			tags: strings,
 			repos: send_repos,
+			devpost_username: $linkedin_username,
+			instagram_username: $linkedin_username,
+			linkedin_username: $linkedin_username,
 		};
 		const site_url = await submit_changes(
 			$github_username,
@@ -187,8 +190,14 @@
 							<div
 								class="grid-item"
 								on:click={() => {
-									if (reposSelected.includes(repos.indexOf(repo))) {
-										let id = reposSelected.indexOf(repos.indexOf(repo));
+									if (
+										reposSelected.includes(
+											repos.indexOf(repo)
+										)
+									) {
+										let id = reposSelected.indexOf(
+											repos.indexOf(repo)
+										);
 										reposSelected.splice(id, 1);
 										reposSelected = reposSelected;
 									} else {
@@ -197,7 +206,10 @@
 											repos.indexOf(repo),
 										];
 									}
-									console.log(repos.indexOf(repo), reposSelected)
+									console.log(
+										repos.indexOf(repo),
+										reposSelected
+									);
 								}}
 							>
 								<h3 class="repo-title">{repo.name}</h3>
@@ -216,7 +228,9 @@
 						send_data();
 						page = "page3";
 					} else {
-						alert("You didn't select any of your Github repositories! Go back and add at least one.")
+						alert(
+							"You didn't select any of your Github repositories! Go back and add at least one."
+						);
 					}
 				}}>Next</button
 			>
@@ -291,6 +305,7 @@
 		height: 100vh;
 		width: 100vw;
 		display: flex;
+		position: fixed;
 	}
 	#editor {
 		width: 50%;
