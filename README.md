@@ -1,6 +1,6 @@
 # Genfolio
 
-Genfolio is a no-code platform for generating developer resume pages.
+Genfolio is a no-code platform for generating developer portfolios.
 
 ## Our stack
 - We use a [Svelte](https://svelte.dev) frontend to create a responsive and speedy website without the overhead of a virtual DOM.
