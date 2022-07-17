@@ -27,7 +27,7 @@ const shallow_user_handler = async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
-}
+};
 router.get("/shallow_user", shallow_user_handler);
 router.post("/shallow_user", shallow_user_handler);
 
@@ -35,6 +35,10 @@ router.post("/generate_site", async (req, res, next) => {
 	try {
 		const github_username = req.body.github_username;
 		const repos = req.body.chosen_repos;
+		const template = req.body.template;
+		const name = req.body.name;
+		const bio = req.body.bio;
+		const tags = req.body.tags;
 
 		if (!github_username) {
 			throw new Error("No GitHub username specified. ");
@@ -42,14 +46,33 @@ router.post("/generate_site", async (req, res, next) => {
 		if (!repos) {
 			throw new Error("No GitHub repositories specified. ");
 		}
+		if (!template) {
+			throw new Error("No template specified.");
+		}
+		if (!name) {
+			throw new Error("No name specified.");
+		}
+		if (!bio) {
+			throw new Error("No bio specified.");
+		}
+		if (!tags) {
+			throw new Error("No tags specified.");
+		}
 
-		const template_success = await copy_template("one", github_username);
+		const template_success = await copy_template(template, github_username);
 
 		if (!template_success) {
 			throw new Error("Something went wrong!");
 		}
 
-		const edit_success = await edit_files(github_username, repos);
+		const edit_success = await edit_files(
+			github_username,
+			repos,
+			template,
+			name,
+			bio,
+			tags
+		);
 		const rooturl = process.env.DEV
 			? "http://localhost:5678"
 			: "https://genfolio.xyz";

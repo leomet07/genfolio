@@ -23,15 +23,36 @@ async function copy_template(template, new_name) {
 	return success;
 }
 
-async function edit_files(github_username, repos) {
-	console.log("Editing the files...");
+async function edit_files(github_username, repos, template, name, bio, tags) {
+	console.log(`Editing the files, based off template ${template}...`);
+
+
 	let indexpath = path.join("sites", github_username, "index.html");
 	const indexhtml = await fs.promises.readFile(indexpath, "utf8");
 
-	const $ = cheerio.load(String(indexhtml));
+	let $ = cheerio.load(String(indexhtml));
 
-	$("#username").text(github_username);
+	$("#name").text(name);
+	$("#bio").text(bio);
 
+	$("#description_tags").html(
+		tags.map((v) => `<span class="hidden_span">${v}</span>`)
+	);
+
+	$("#github_link").attr("href", "https://github.com/" + github_username);
+
+	await fs.promises.writeFile(indexpath, $.root().html());
+
+	let projectspath = path.join("sites", github_username, "projects" , "index.html");
+	const projectshtml = await fs.promises.readFile(projectspath, "utf8");
+
+	$ = cheerio.load(String(projectshtml));
+
+	$("#name").text(name);
+	
+
+	$("#github_link").attr("href", "https://github.com/" + github_username);
+	
 	let added_up_divs = "";
 	for (let i = 0; i < repos.length; i++) {
 		let repo = repos[i];
@@ -48,8 +69,13 @@ async function edit_files(github_username, repos) {
 	}
 	$("#projects").html(added_up_divs);
 
+	await fs.promises.writeFile(projectspath, $.root().html());
+
+
+
+	
+
 	// Write the edited page
-	await fs.promises.writeFile(indexpath, $.root().html());
 
 	// TODO: Loop through the user data and add a <section> into the body with each project
 	return true;
