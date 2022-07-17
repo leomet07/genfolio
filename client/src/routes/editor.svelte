@@ -1,7 +1,6 @@
 <script>
 	let bio = "";
 	let name = "";
-	let githubLink = "";
 	let currentString = "";
 	let strings = [];
 	let page = "page1";
@@ -14,39 +13,44 @@
 	// import A1 from "./templates/1.svelte";
 	import fetch_user_data from "../helpers/fetch_user_data";
 	import { onMount } from "svelte";
-	$github_username = "Test";
 
 	const setSortedRepos = () => {
 		console.log("sorting", repoSearch, repos);
-		sortedRepos = repos.filter(element => {
-			return element.name.toLowerCase().includes(repoSearch.toLowerCase());
-		})
-	}
+		sortedRepos = repos.filter((element) => {
+			return element.name
+				.toLowerCase()
+				.includes(repoSearch.toLowerCase());
+		});
+	};
 
 	onMount(async () => {
-		console.log($templateid)
-		const user_data = await fetch_user_data("leomet07");
-		repos = user_data.repos;
-		sortedRepos = repos;
+		console.log($templateid);	
 	});
 </script>
-
 
 <div class="root">
 	<div class="editor">
 		{#if page === "page1"}
-			<button class="next-button" on:click={() => {page = "page2"}}>Next</button>
+			<button
+				class="next-button"
+				on:click={async () => {
+					page = "page2";
+					repos = (await fetch_user_data($github_username)).repos;
+					sortedRepos = repos;
+				}}>Next</button
+			>
 
 			<h1 class="header">Editor</h1>
 
 			<div class="divider" />
 			<div class="info">
-				<label class="label">First Name</label>
+				<label for="first_name_form" class="label">First Name</label>
 				<input
 					bind:value={name}
 					class="input"
 					type="text"
 					placeholder="First Name"
+					id="first_name_form"
 				/>
 				<label class="label">Bio</label>
 				<textarea
@@ -54,12 +58,12 @@
 					class="input"
 					placeholder="ex. I'm a student as x and I am currently building y"
 				/>
-				<label class="label">Github Link</label>
+				<label class="label">Github Username</label>
 				<input
-					bind:value={githubLink}
+					bind:value={$github_username}
 					class="input"
 					type="text"
-					placeholder="ex. https://github.com/jmurphy5613"
+					placeholder="ex. jmurphy5613"
 				/>
 
 				<label class="label">Animated Strings Input</label>
@@ -102,7 +106,10 @@
 			<h1 class="header">Select Projects</h1>
 			<div class="divider" />
 			<div class="info">
-				<h2 class="repo-select-info"><spans style="color: #c25eff">{reposSelected.length}</spans> of 6 repos selected</h2>
+				<h2 class="repo-select-info">
+					<spans style="color: #c25eff">{reposSelected.length}</spans>
+					of 6 repos selected
+				</h2>
 				<input
 					on:keyup={(e) => {
 						repoSearch = e.target.value;
@@ -112,35 +119,41 @@
 					type="text"
 					placeholder="Search for your repo"
 				/>
-				<div class="repo-grid"> 
+				<div class="repo-grid">
 					{#each sortedRepos as repo, index}
 						{#if index < 8}
-						<!-- svelte-ignore a11y-mouse-events-have-key-events -->
-						<div class="grid-item" 
-							on:click={() => {
-								if(reposSelected.includes(index)) {
-									let id = reposSelected.indexOf(index);
-									reposSelected.splice(id, 1);
-									reposSelected = reposSelected;
-								}
-								else {
-									reposSelected = [...reposSelected, index];
-								}
-							}}
-						>
-							<h3 class="repo-title">{repo.name}</h3>
-							{#if reposSelected.includes(index)}
-								<h4 style="color: #c25eff">selected</h4>
-							{/if}
-						</div>
+							<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+							<div
+								class="grid-item"
+								on:click={() => {
+									if (reposSelected.includes(index)) {
+										let id = reposSelected.indexOf(index);
+										reposSelected.splice(id, 1);
+										reposSelected = reposSelected;
+									} else {
+										reposSelected = [
+											...reposSelected,
+											index,
+										];
+									}
+								}}
+							>
+								<h3 class="repo-title">{repo.name}</h3>
+								{#if reposSelected.includes(index)}
+									<h4 style="color: #c25eff">selected</h4>
+								{/if}
+							</div>
 						{/if}
 					{/each}
 				</div>
 			</div>
-			<button class="next-button" on:click={() => {page = "page2"}}>Next</button>
+			<button
+				class="next-button"
+				on:click={() => {
+					page = "page3";
+				}}>Next</button
+			>
 		{/if}
-
-
 	</div>
 	<div class="preview">
 		<!-- <h1 class="header">Preview</h1> -->
@@ -303,6 +316,6 @@
 		margin-top: 1rem;
 	}
 	textarea {
-		resize:none;
+		resize: none;
 	}
 </style>
