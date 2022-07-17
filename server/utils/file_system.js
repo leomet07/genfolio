@@ -34,16 +34,16 @@ async function edit_files(github_username, data) {
 
 	if (name) {
 		$("#name").text(name);
+		$("title").text(name + "'s Portfolio");
 	}
-	if (bio){
+	if (bio) {
 		$("#bio").text(bio);
 	}
-	if (tags){
+	if (tags) {
 		$("#description_tags").html(
 			tags.map((v) => `<span class="hidden_span">${v}</span>`)
 		);
 	}
-	
 
 	$("#github_link").attr("href", "https://github.com/" + github_username);
 
@@ -58,18 +58,19 @@ async function edit_files(github_username, data) {
 	const projectshtml = await fs.promises.readFile(projectspath, "utf8");
 
 	$ = cheerio.load(String(projectshtml));
-	
-	if (name){
+
+	if (name) {
 		$("#name").text(name);
+		$("title").text(name + "'s Projects");
 	}
 
 	$("#github_link").attr("href", "https://github.com/" + github_username);
 
-	if (repos){
+	if (repos) {
 		let added_up_divs = "";
 		for (let i = 0; i < repos.length; i++) {
 			let repo = repos[i];
-	
+
 			added_up_divs =
 				added_up_divs +
 				`
@@ -83,8 +84,7 @@ async function edit_files(github_username, data) {
 		}
 		$("#projects").html(added_up_divs);
 	}
-	
-	
+
 	await fs.promises.writeFile(projectspath, $.root().html());
 
 	// Write the edited page
