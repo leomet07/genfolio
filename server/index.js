@@ -35,10 +35,10 @@ app.use(
 	express.static(__dirname + "/sites", {
 		setHeaders: function (res, path, stat) {
 			res.set("Access-Control-Allow-Origin", "*");
-			res.set(
-				"Content-Security-Policy",
-				"connect-src https://*.genfolio.xyz"
-			);
+			// res.set(
+			// 	"Content-Security-Policy",
+			// 	"connect-src https://*.genfolio.xyz"
+			// );
 			// res.set("X-Frame-Options", "SAMEORIGIN");
 			// res.set("X-XSS-Protection", "1; mode=block");
 			// res.set("X-Content-Type-Options", "nosniff");
@@ -51,10 +51,10 @@ app.use(
 	express.static(__dirname + "/templates", {
 		setHeaders: function (res, path, stat) {
 			res.set("Access-Control-Allow-Origin", "*");
-			res.set(
-				"Content-Security-Policy",
-				"connect-src https://*.genfolio.xyz"
-			);
+			// res.set(
+			// 	"Content-Security-Policy",
+			// 	"connect-src https://*.genfolio.xyz"
+			// );
 			// res.set("X-Frame-Options", "SAMEORIGIN");
 			// res.set("X-XSS-Protection", "1; mode=block");
 			// res.set("X-Content-Type-Options", "nosniff");
@@ -69,10 +69,10 @@ app.use(
 	express.static(__dirname + "/public", {
 		setHeaders: function (res, path, stat) {
 			res.set("Access-Control-Allow-Origin", "*");
-			res.set(
-				"Content-Security-Policy",
-				"connect-src https://*.genfolio.xyz"
-			);
+			// res.set(
+			// 	"Content-Security-Policy",
+			// 	"connect-src https://genfolio.xyz"
+			// );
 			// res.set("X-Frame-Options", "SAMEORIGIN");
 			// res.set("X-XSS-Protection", "1; mode=block");
 			// res.set("X-Content-Type-Options", "nosniff");
@@ -81,7 +81,7 @@ app.use(
 );
 
 app.get(["/", "/*"], function (req, res, next) {
-	res.set("Content-Security-Policy", "connect-src https://*.genfolio.xyz");
+	// res.set("Content-Security-Policy", "connect-src https://genfolio.xyz");
 	// res.set("X-Frame-Options", "SAMEORIGIN");
 	// res.set("X-XSS-Protection", "1; mode=block");
 	// res.set("X-Content-Type-Options", "nosniff");
