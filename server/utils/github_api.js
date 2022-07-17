@@ -31,19 +31,17 @@ async function handled_gql(query, body) {
 async function get_user_shallow(username) {
 	// @param username: String representing the user's GitHub username (potentially provided with OAuth2 if we have the time)
 	// returns a somewhat minimized Object representing the user with some relevant profile data
-	const user = await handled_rest(`GET /users/${username}`).then(res =>
-	{
-		return {
-			"username": res.login,
-			"name": res.name,
-			"pfp": res.avatar_url,
-			"url": res.html_url,
-			"bio": res.bio,
-			"followers": res.followers,
-			"public_repos": res.public_repos,
-			"repos": []
-		}
-	});
+	const res = await handled_rest(`GET /users/${username}`);
+	const user = {
+		username: res.login,
+		name: res.name,
+		pfp: res.avatar_url,
+		url: res.html_url,
+		bio: res.bio,
+		followers: res.followers,
+		public_repos: res.public_repos,
+		repos: [],
+	};
 
 	// get all repos using a while loop (to respect GitHub pagination limits)
 	let repos_left = user.public_repos;
@@ -69,41 +67,4 @@ async function get_user_shallow(username) {
 	return user;
 }
 
-async function get_repos(repositories) {
-	// @param repository - Array of Objects {owner: string, name: string}
-
-	const repos = [];
-
-	for (const repo in repositories) {
-		console.log(repositories[repo]);
-		repos.push(
-			await handled_gql(
-				`query getRepo($owner: String!, $name: String!) {
-				repository(owner: $owner, name: $name) {
-					name
-					url
-					languages(first: 3) {
-						edges {
-							node {
-								name
-							}
-						}
-					}
-					description
-				}
-			}`,
-				{
-					owner: repositories[repo].owner,
-					name: repositories[repo].name,
-				}
-			).then((res) => res.repository)
-		);
-		repos[repo].languages = repos[repo].languages.edges.map(
-			(node) => node.node.name
-		);
-	}
-
-	return repos;
-}
-
-module.exports = { get_repos, get_user_shallow };
+module.exports = { get_user_shallow };

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { copy_template, edit_files } = require("../utils/file_system");
-const { get_user_shallow, get_repos } = require("../utils/github_api");
+const { get_user_shallow } = require("../utils/github_api");
 const middlewares = require("../middlewares");
 
 router.get("/", (req, res) => {
