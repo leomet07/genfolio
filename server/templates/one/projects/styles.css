@@ -4,13 +4,15 @@
 	margin: 0;
 	box-sizing: border-box;
 }
-
-.root {
-	height: 100vh;
-	width: 100vw;
+body {
 	background-image: url("../img/landing.jpg");
 	background-position: center;
-	background-size: cover;
+	background-size: auto;
+	background-color: #c0651c;
+}
+.root {
+	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -18,11 +20,20 @@
 }
 
 #main-content {
+	display: block;
+	min-height: 700px;
 	text-align: center;
+	padding-top: 15vh;
+	padding-bottom: 1vh;
 	width: 90%;
+	/* display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; */
 }
 
-h1 {
+h1,
+.name {
 	font-size: 3rem;
 	color: #fff;
 	text-align: center;
@@ -53,7 +64,7 @@ h2 {
 	border-radius: 15px;
 	color: white;
 	font-size: 1rem;
-	margin-top: 5rem;
+	margin-top: 0rem;
 	font-family: "Outfit";
 	transition: 0.5s;
 	padding: 20px;
@@ -67,24 +78,32 @@ h2 {
 
 #projects {
 	width: 70vw;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 1rem;
-	margin-bottom: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin: auto;
 }
 
 .project {
 	height: 25vh;
+	width: 380px;
+	margin: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgb(18, 19, 30);
 	border-radius: 15px;
 	text-align: center;
+	margin-bottom: 10px;
 }
 
 .project_name {
 	color: white;
 	font-family: "IBM Plex Mono";
 	font-weight: 200;
+}
+
+.project a {
+	text-decoration: none;
 }
