@@ -1,32 +1,36 @@
+<script>
+	import { templateid } from "../store";
+	import { navigate } from "svelte-routing";
+	function goToTemplate(where) {
+		$templateid = where;
+		console.log($templateid)
+		navigate( "/editor", {replace : true})
+	}
+</script>
+
 <div class="root">
-	<div class="item1">Choose a Template</div>
+	<div class="title">Choose a Template</div>
 	<div class="grid-container">
 		<div class="grid-item">
 			<p class="ttext">Purple Dark</p>
 			<button
 				class="templatebutton"
-				onclick="
-			location.href='templates/1';
-			">Use</button
-			>
+				on:click={() => { goToTemplate('one')}}>Use</button>
 		</div>
 		<div class="grid-item">
 			<p class="ttext">Template 2 Name</p>
 			<button
 				class="templatebutton"
-				onclick="
-			location.href='templates/2';
-			">Use</button
-			>
+				on:click={() => { goToTemplate('two')}}>Use</button>
 		</div>
-		<div class="grid-item">
+		<div
+			class="grid-item"
+			style="background-image: url('/img/previews/three.png');"
+		>
 			<p class="ttext">Template 3 Name</p>
 			<button
 				class="templatebutton"
-				onclick="
-			location.href='templates/3';
-			">Use</button
-			>
+				on:click={() => { goToTemplate('three')}}>Use</button>
 		</div>
 	</div>
 </div>
@@ -46,12 +50,11 @@
 		flex-direction: column;
 		margin: 0;
 		padding: 0;
-		
 	}
 	button:hover {
 		cursor: pointer;
 	}
-	.item1 {
+	.title {
 		color: white;
 		font-size: 2em;
 		font-weight: bold;
@@ -59,19 +62,19 @@
 		font-family: "Inter", sans-serif;
 		font-weight: 800;
 		font-size: 4rem;
-		padding: 5%;
+		padding: 3%;
 	}
 	.grid-container {
 		display: grid;
-		width: 70%;
+		width: 80%;
 		margin: 0;
 		padding: 0;
 		justify-content: center;
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
+		margin-bottom : 30px;
 	}
-
 
 	.templatebutton {
 		background-color: #c25eff;
@@ -86,7 +89,7 @@
 		border-radius: 7px;
 		font-family: "Inter";
 		font-weight: 500;
-		opacity: 0.5;
+		opacity: 0;
 		transition: opacity 0.5s;
 	}
 	.grid-item:hover .ttext {
@@ -96,21 +99,22 @@
 		opacity: 1;
 	}
 	.ttext {
-		opacity: 0.5;
+		opacity: 0;
 		transition: opacity 0.5s;
 		color: white;
 	}
 
 	.grid-item {
-		height: 50vh;
-		width : 300px;
+		height: 241px;
+		width: 469px;
 		background-color: blue;
+		background-size: cover;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		margin : 10px;
+		margin: 10px;
+		border : 1px solid rgb(39, 36, 36);
+		border-radius: 3%;
 	}
-
-
 </style>

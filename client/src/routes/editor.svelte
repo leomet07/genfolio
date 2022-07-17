@@ -9,7 +9,7 @@
 	let repoSearch = "";
 	let reposSelected = [];
 	let sortedRepos = [];
-	import { github_username } from "../store";
+	import { github_username, templateid } from "../store";
 	import About from "./About.svelte";
 	// import A1 from "./templates/1.svelte";
 	import fetch_user_data from "../helpers/fetch_user_data";
@@ -24,6 +24,7 @@
 	}
 
 	onMount(async () => {
+		console.log($templateid)
 		const user_data = await fetch_user_data("leomet07");
 		repos = user_data.repos;
 		sortedRepos = repos;
