@@ -1,5 +1,3 @@
-
-
 <div class="root">
 	<div class="item1">Choose a Template</div>
 	<div class="grid-container">
@@ -39,8 +37,8 @@
 -->
 <style>
 	.root {
-		height: 100vh;
-		width: 100vw;
+		min-height: 100vh;
+		width: 100%;
 		background-color: black;
 		display: flex;
 		justify-content: center;
@@ -48,6 +46,7 @@
 		flex-direction: column;
 		margin: 0;
 		padding: 0;
+		
 	}
 	button:hover {
 		cursor: pointer;
@@ -65,11 +64,15 @@
 	.grid-container {
 		display: grid;
 		width: 70%;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 10px;
 		margin: 0;
 		padding: 0;
+		justify-content: center;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
+
+
 	.templatebutton {
 		background-color: #c25eff;
 		border: none;
@@ -83,7 +86,7 @@
 		border-radius: 7px;
 		font-family: "Inter";
 		font-weight: 500;
-		opacity:0.5;
+		opacity: 0.5;
 		transition: opacity 0.5s;
 	}
 	.grid-item:hover .ttext {
@@ -95,15 +98,19 @@
 	.ttext {
 		opacity: 0.5;
 		transition: opacity 0.5s;
-		color : white;
+		color: white;
 	}
 
 	.grid-item {
 		height: 50vh;
+		width : 300px;
 		background-color: blue;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		margin : 10px;
 	}
+
+
 </style>
