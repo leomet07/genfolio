@@ -1,0 +1,90 @@
+* {
+	font-family: sans-serif;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.root {
+	height: 100vh;
+	width: 100vw;
+	background-image: url("../img/landing.jpg");
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#main-content {
+	text-align: center;
+	width: 90%;
+}
+
+h1 {
+	font-size: 3rem;
+	color: #fff;
+	text-align: center;
+	font-family: "Outfit";
+	font-weight: 300;
+	/* add text shadow */
+	text-shadow: 0 0 0.5rem #000;
+}
+
+h2 {
+	text-align: center;
+	font-size: 2rem;
+	color: white;
+	font-family: "Outfit";
+	font-weight: 300;
+	/* add text shadow */
+	text-shadow: 0 0 0.5rem #000;
+}
+
+.github_link {
+}
+
+.home-button {
+	width: 7rem;
+	text-decoration: none;
+	background: transparent;
+	border: 3px solid white;
+	border-radius: 15px;
+	color: white;
+	font-size: 1rem;
+	margin-top: 5rem;
+	font-family: "Outfit";
+	transition: 0.5s;
+	padding: 20px;
+	text-align: center;
+}
+.home-button:hover {
+	background-color: white;
+	color: black;
+	cursor: pointer;
+}
+
+#projects {
+	width: 70vw;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 1rem;
+	margin-bottom: 30px;
+}
+
+.project {
+	height: 25vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(18, 19, 30);
+	border-radius: 15px;
+	text-align: center;
+}
+
+.project_name {
+	color: white;
+	font-family: "IBM Plex Mono";
+	font-weight: 200;
+}
