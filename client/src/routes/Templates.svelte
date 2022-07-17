@@ -3,34 +3,49 @@
 	import { navigate } from "svelte-routing";
 	function goToTemplate(where) {
 		$templateid = where;
-		console.log($templateid)
-		navigate( "/editor", {replace : true})
+		console.log($templateid);
+		navigate("/editor", { replace: true });
 	}
 </script>
 
 <div class="root">
 	<div class="title">Choose a Template</div>
 	<div class="grid-container">
-		<div class="grid-item">
-			<p class="ttext">Purple Dark</p>
+		<div
+			class="grid-item"
+			style="background-image: url('/img/previews/one.png');"
+		>
+			<p class="ttext">Big background!</p>
 			<button
 				class="templatebutton"
-				on:click={() => { goToTemplate('one')}}>Use</button>
+				on:click={() => {
+					goToTemplate("one");
+				}}>Use</button
+			>
 		</div>
-		<div class="grid-item" style="background-image: url('/img/previews/two.png');">
-			<p class="ttext">Template 2 Name</p>
+		<div
+			class="grid-item"
+			style="background-image: url('/img/previews/two.png');"
+		>
+			<p class="ttext">Solarized</p>
 			<button
 				class="templatebutton"
-				on:click={() => { goToTemplate('two')}}>Use</button>
+				on:click={() => {
+					goToTemplate("two");
+				}}>Use</button
+			>
 		</div>
 		<div
 			class="grid-item"
 			style="background-image: url('/img/previews/three.png');"
 		>
-			<p class="ttext">Template 3 Name</p>
+			<p class="ttext">Dracula</p>
 			<button
 				class="templatebutton"
-				on:click={() => { goToTemplate('three')}}>Use</button>
+				on:click={() => {
+					goToTemplate("three");
+				}}>Use</button
+			>
 		</div>
 	</div>
 </div>
@@ -73,7 +88,7 @@
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
-		margin-bottom : 30px;
+		margin-bottom: 30px;
 	}
 
 	.templatebutton {
@@ -114,7 +129,7 @@
 		align-items: center;
 		flex-direction: column;
 		margin: 10px;
-		border : 1px solid rgb(39, 36, 36);
+		border: 1px solid rgb(39, 36, 36);
 		border-radius: 3%;
 	}
 </style>
