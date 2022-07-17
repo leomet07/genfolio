@@ -15,9 +15,9 @@ app.use(express.json());
 app.use(zip());
 app.use(morgan("tiny"));
 
-// site-wide rate limit: 60 requests / 60 seconds
+// site-wide rate limit: 120 requests / 60 seconds
 const baseLimit = rateLimit({
-	max: 60,
+	max: 120,
 	windowMs: 60 * 1000,
 
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers

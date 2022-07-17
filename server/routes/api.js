@@ -53,7 +53,14 @@ router.get("/shallow_user", ghUserLimit, shallow_user_handler);
 router.post("/shallow_user", ghUserLimit, shallow_user_handler);
 
 // site generation rate limit: 60 requests / 60 seconds  (implicit, inherited from full express() app)
-router.post("/generate_site", async (req, res, next) => {
+const siteLimit = rateLimit({
+	max: 60,
+	windowMs: 60 * 1000,
+
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+router.post("/generate_site", siteLimit, async (req, res, next) => {
 	try {
 		const github_username = req.body.github_username;
 		const repos = req.body.repos;
