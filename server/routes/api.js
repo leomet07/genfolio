@@ -43,7 +43,7 @@ router.post("/shallow_user", shallow_user_handler);
 router.post("/generate_site", async (req, res, next) => {
 	try {
 		const github_username = req.body.github_username;
-		const repos = req.body.chosen_repos;
+		const repos = req.body.repos;
 		const template = req.body.template;
 		const name = req.body.name;
 		const bio = req.body.bio;
