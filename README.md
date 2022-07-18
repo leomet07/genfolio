@@ -18,4 +18,6 @@ Run the `./redeploy.sh` script at the root of this repository.
 To run development builds of the Genfolio services individually, refer to the specific README.md files within each directory. 
 
 ## About
-This is a group submission for [TechOptimum](https://techoptimum.devpost.com/) by [David Chen](https://github.com/TheEgghead27), [Leonid Metlitsky](https://github.com/leomet07), [John Murphy](https://github.com/jmurphy5613), and [Richard Watkins](https://github.com/thegu5).  
+This is a group submission for [TechOptimum](https://techoptimum.devpost.com/) by [David Chen](https://github.com/TheEgghead27), [Leonid Metlitsky](https://github.com/leomet07), [John Murphy](https://github.com/jmurphy5613), and [Richard Watkins](https://github.com/thegu5). 
+
+We won [first place](https://devpost.com/software/genfolio) at TechOptimum.
